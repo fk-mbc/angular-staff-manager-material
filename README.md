@@ -21,7 +21,7 @@ Clone this repository to your local drive.
 git clone https://github.com/fk-mbc/angular-staff-manager-material.git
 ```
 
-Install alle npm and bower dependencies.
+Install all npm and bower dependencies.
 
 ```console
 cd angular-staff-manager-material
@@ -32,6 +32,14 @@ npm install && bower install
 
 Run `grunt` for building and `grunt serve` for preview.
 
+```console
+grunt serve
+```
+
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+
+```console
+grunt test
+```
