@@ -38,14 +38,14 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'newer:jscs:all'],
+        files: ['<%= yeoman.app %>/**/*.js'],
+        tasks: ['newer:jshint:all', 'newer:jscs:all', 'injector'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['test/spec/{,*/}*.js', '<%= yeoman.app %>/**/*.spec.js'],
         tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
       },
       compass: {
@@ -224,7 +224,40 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
-    }, 
+    },
+
+    injector: {
+      options: {
+        sort: function (a, b) {
+          var module = /\.module\.js$/;
+          var aMod = module.test(a);
+          var bMod = module.test(b);
+          // inject *.module.js first
+          // sorts modules by length to have the
+          // main module as latest in order of all modules
+          var direction = 0;
+          if (aMod === bMod && !bMod) {
+            direction = ((b.length - a.length) > 0) ? 1 : -1;
+          } else if (aMod === bMod) {
+            direction = ((b.length - a.length) > 0) ? 1 : -1;
+          } else {
+            direction = (aMod ? -1 : 1);
+          }
+          return direction;
+        },
+        ignorePath: 'app/'
+      },
+      dependencies: {
+        files: {
+          'app/index.html': [
+            'app/**/*.module.js',
+            'app/**/*.js',
+            '!app/**/*.min.js',
+            '!app/**/*.spec.js'
+          ]
+        }
+      }
+    },
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
@@ -463,6 +496,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'injector',
       'concurrent:server',
       'postcss:server',
       'connect:livereload',
@@ -478,6 +512,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'wiredep',
+    'injector',
     'concurrent:test',
     'postcss',
     'connect:test',
@@ -487,6 +522,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'injector',
     'useminPrepare',
     'concurrent:dist',
     'postcss',
