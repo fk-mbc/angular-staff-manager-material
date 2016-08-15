@@ -1,5 +1,10 @@
+$fa-font-path: "/fonts/font-awesome";
 // bower:scss
+@import "font-awesome/scss/font-awesome.scss";
 // endbower
+
+@import "_material-icons.scss";
+
 html { box-sizing: border-box; } *, ::before, ::after { box-sizing: inherit; }
 
 body {
