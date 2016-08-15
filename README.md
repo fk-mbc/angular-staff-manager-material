@@ -3,6 +3,11 @@
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.15.1.
 
+## Live Preview
+You can find the current state of the app at https://fk-mbc.github.io/angular-staff-manager-material/
+This version ist build out of the dist folder. It could be, that it won't work in later versions
+depending on some api calls that are not possible on github.
+
 ## Requirements
 
 For building and running the development or test mode, you will need some tools
