@@ -96,9 +96,9 @@ module.exports = function (grunt) {
                 connect.static('./bower_components')),
               connect().use('/fonts/font-awesome',
                 connect.static('./bower_components/font-awesome/fonts')),
-              connect().use('/fonts/roboto',
+              connect().use('/fonts/Roboto',
                 connect.static('./bower_components/roboto-fontface/fonts/roboto')),
-              connect().use('/fonts/roboto-condensed',
+              connect().use('/fonts/Roboto-Condensed',
                 connect.static('./bower_components/roboto-fontface/fonts/roboto-condensed')),
               connect().use('/fonts/font-awesome',
                 connect.static('./bower_components/font-awesome/fonts')),
@@ -432,21 +432,21 @@ module.exports = function (grunt) {
           }, {
             expand: true,
             dot: true,
-            cwd: '<%= yeoman.app %>/fonts/material-icons', // change this for font-awesome
+            cwd: '<%= yeoman.app %>/fonts/material-icons',
             src: ['*.woff', '*.woff2', '*.ttf', '*.eot'],
             dest: '<%= yeoman.dist %>/fonts/material-icons'
           }, {
             expand: true,
             dot: true,
-            cwd: 'bower_components/font-awesome/fonts', // change this for font-awesome
+            cwd: 'bower_components/font-awesome/fonts',
             src: ['*.woff', '*.woff2', '*.ttf', '*.eot'],
             dest: '<%= yeoman.dist %>/fonts/font-awesome'
           }, {
             expand: true,
             dot: true,
-            cwd: 'bower_components/roboto-fontface/fonts/roboto', // change this for font-awesome
+            cwd: 'bower_components/roboto-fontface/fonts/roboto',
             src: ['*.woff', '*.woff2', '*.ttf', '*.eot'],
-            dest: '<%= yeoman.dist %>/fonts/roboto'
+            dest: '<%= yeoman.dist %>/fonts/Roboto'
           }
         ]
       },
