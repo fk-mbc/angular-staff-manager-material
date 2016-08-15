@@ -16,7 +16,8 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+    cdnify: 'grunt-google-cdn',
+    configureProxies: 'grunt-connect-proxy'
   });
 
   // Configurable paths for the application
@@ -72,21 +73,30 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [
+        {
+          context: '/api',
+          host: 'localhost',
+          port: 8080,
+          https: false,
+          xforward: false,
+          headers: {
+            "x-custom-added-header": 'myValue'
+          },
+          hideHeaders: ['x-removed-header']
+        }
+      ],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-                ),
-              connect().use(
-                '/app/styles',
-                connect.static('./app/styles')
-                ),
-              connect.static(appConfig.app)
+              connect().use('/bower_components', connect.static('./bower_components')),
+              connect().use('/fonts/font-awesome', connect.static('./bower_components/font-awesome/fonts')),
+              connect().use('/app/styles', connect.static('./app/styles')),
+              connect.static(appConfig.app),
+              require('grunt-connect-proxy/lib/utils').proxyRequest
             ];
           }
         }
@@ -213,7 +223,7 @@ module.exports = function (grunt) {
         }
       },
       sass: {
-        src: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
+        src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },
@@ -391,7 +401,7 @@ module.exports = function (grunt) {
           usemin: 'scripts/scripts.js'
         },
         cwd: '<%= yeoman.app %>',
-        src: '**/*.html',
+        src: 'scripts/**/*.html',
         dest: '.tmp/templateCache.js'
       }
     },
@@ -416,7 +426,8 @@ module.exports = function (grunt) {
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
-        files: [{
+        files: [
+          {
             expand: true,
             dot: true,
             cwd: '<%= yeoman.app %>',
@@ -432,7 +443,26 @@ module.exports = function (grunt) {
             cwd: '.tmp/images',
             dest: '<%= yeoman.dist %>/images',
             src: ['generated/*']
-          }]
+          }, {
+            expand: true,
+            dot: true,
+            cwd: '<%= yeoman.app %>/fonts/material-icons', // change this for font-awesome
+            src: ['*.*'],
+            dest: '<%= yeoman.dist %>/fonts/material-icons'
+          }, {
+            expand: true,
+            dot: true,
+            cwd: 'bower_components/font-awesome/fonts', // change this for font-awesome
+            src: ['*.*'],
+            dest: '<%= yeoman.dist %>/fonts/font-awesome'
+          }, {
+            expand: true,
+            dot: true,
+            cwd: 'bower_components/roboto-fontface/fonts', // change this for font-awesome
+            src: ['roboto/*.*'],
+            dest: '<%= yeoman.dist %>/fonts'
+          }
+        ]
       },
       styles: {
         expand: true,
@@ -478,6 +508,7 @@ module.exports = function (grunt) {
       'injector',
       'concurrent:server',
       'postcss:server',
+      'configureProxies:all',
       'connect:livereload',
       'watch'
     ]);
@@ -509,7 +540,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
+    //'cdnify',
     'cssmin',
     'uglify',
     'filerev',
