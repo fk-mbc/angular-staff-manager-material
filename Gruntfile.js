@@ -92,9 +92,18 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
-              connect().use('/bower_components', connect.static('./bower_components')),
-              connect().use('/fonts/font-awesome', connect.static('./bower_components/font-awesome/fonts')),
-              connect().use('/app/styles', connect.static('./app/styles')),
+              connect().use('/bower_components',
+                connect.static('./bower_components')),
+              connect().use('/fonts/font-awesome',
+                connect.static('./bower_components/font-awesome/fonts')),
+              connect().use('/fonts/roboto',
+                connect.static('./bower_components/roboto-fontface/fonts/roboto')),
+              connect().use('/fonts/roboto-condensed',
+                connect.static('./bower_components/roboto-fontface/fonts/roboto-condensed')),
+              connect().use('/fonts/font-awesome',
+                connect.static('./bower_components/font-awesome/fonts')),
+              connect().use('/app/styles',
+                connect.static('./app/styles')),
               connect.static(appConfig.app),
               require('grunt-connect-proxy/lib/utils').proxyRequest
             ];
@@ -204,7 +213,10 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath: /\.\.\//
+        ignorePath: /\.\.\//,
+        exclude: [
+          'bower_components/roboto-fontface'
+        ]
       },
       test: {
         devDependencies: true,
@@ -331,32 +343,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    // The following *-min tasks will produce minified files in the dist folder
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
     imagemin: {
       dist: {
         files: [{
@@ -447,20 +433,20 @@ module.exports = function (grunt) {
             expand: true,
             dot: true,
             cwd: '<%= yeoman.app %>/fonts/material-icons', // change this for font-awesome
-            src: ['*.*'],
+            src: ['*.woff', '*.woff2', '*.ttf', '*.eot'],
             dest: '<%= yeoman.dist %>/fonts/material-icons'
           }, {
             expand: true,
             dot: true,
             cwd: 'bower_components/font-awesome/fonts', // change this for font-awesome
-            src: ['*.*'],
+            src: ['*.woff', '*.woff2', '*.ttf', '*.eot'],
             dest: '<%= yeoman.dist %>/fonts/font-awesome'
           }, {
             expand: true,
             dot: true,
-            cwd: 'bower_components/roboto-fontface/fonts', // change this for font-awesome
-            src: ['roboto/*.*'],
-            dest: '<%= yeoman.dist %>/fonts'
+            cwd: 'bower_components/roboto-fontface/fonts/roboto', // change this for font-awesome
+            src: ['*.woff', '*.woff2', '*.ttf', '*.eot'],
+            dest: '<%= yeoman.dist %>/fonts/roboto'
           }
         ]
       },

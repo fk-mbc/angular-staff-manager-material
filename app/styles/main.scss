@@ -1,8 +1,10 @@
-$fa-font-path: "/fonts/font-awesome";
+$fa-font-path: "../fonts/font-awesome";
+$roboto-font-path: "../fonts";
+
 // bower:scss
 @import "font-awesome/scss/font-awesome.scss";
 // endbower
-
+@import "roboto-fontface/css/roboto/sass/roboto-fontface.scss";
 @import "_material-icons.scss";
 
 html { box-sizing: border-box; } *, ::before, ::after { box-sizing: inherit; }
