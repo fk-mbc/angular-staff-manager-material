@@ -9,7 +9,7 @@
  */
 angular
   .module('staffManagerApp')
-  .controller('AppCtrl', function ($location, $mdSidenav, loadingIndicatorService) {
+  .controller('AppCtrl', function ($location, $mdSidenav, $timeout, loadingIndicatorService) {
     var vm = this;
 
     vm.navigateTo = function (target) {
@@ -22,4 +22,12 @@ angular
     };
 
     vm.loadingIndicatorService = loadingIndicatorService;
+
+    vm.login = {
+      hide: true
+    };
+
+    $timeout(function () {
+      vm.login.hide = false;
+    }, 100);
   });

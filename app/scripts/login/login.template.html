@@ -1,0 +1,37 @@
+<div class="login-mask" ng-if="app.login.hide !== true">
+  <div flex layout-fill layout="column" layout-gt-sm="row">
+
+    <md-content flex class="login-bg" md-colors="{background: 'blue'}">
+      <div class="login-welcome">
+        <h1><md-icon>face</md-icon> Staff Manager Material</h1>
+        <div>Welcome to the angular staff management material demo.</div>
+      </div>
+    </md-content>
+
+    <md-content flex class="login-area" layout="column" md-whiteframe="6">
+      <div class="title">Log in to your account</div>
+      <div class="description">You can use the demo accout with email <i>w.white@staff-manager.tdl</i> and <i>demo</i> as password .</div>
+      <form class="login-form" novalidate="">
+        <md-input-container class="md-block">
+          <input type="email" name="email" ng-model="login.form.email" placeholder="Email" ng-pattern="/^.+@.+\..+$/" required class="md-input ng-empty">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="password" name="password" ng-model="login.form.password" placeholder="Password" required class="md-input ng-empty">
+        </md-input-container>
+        <div class="remember-password layout-sm-column" layout="row" layout-sm="column">
+          <md-checkbox class="remember-me md-default-theme ng-empty" ng-model="data.cb1">
+            Remember Me
+          </md-checkbox>
+          <span flex></span>
+          <a class="forgot-password md-accent-color" href="#">
+            Forgot Password?
+          </a>
+        </div>
+        <button class="md-raised md-primary submit-button md-button" ng-click="app.login.hide = true">Log In</button>
+        <div class="register">
+          Don't have an account? Sorry, it is not possible to create one atm.
+        </div>
+      </form>
+    </md-content>
+  </div>
+</div>
