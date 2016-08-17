@@ -447,6 +447,12 @@ module.exports = function (grunt) {
             cwd: 'bower_components/roboto-fontface/fonts/roboto',
             src: ['*.woff', '*.woff2', '*.ttf', '*.eot'],
             dest: '<%= yeoman.dist %>/fonts/Roboto'
+          }, {
+            expand: true,
+            dot: true,
+            cwd: '<%= yeoman.app %>/data',
+            src: ['*.*'],
+            dest: '<%= yeoman.dist %>/data'
           }
         ]
       },
