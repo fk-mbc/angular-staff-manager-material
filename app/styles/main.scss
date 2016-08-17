@@ -20,3 +20,36 @@ md-content {
 md-card {
   margin-bottom: 16px;
 }
+
+.md-overlay-bg {
+  background-color: rgba(33, 33, 33, 0.48);
+  transition: visibility 0s, opacity 0.5s linear;
+  opacity: 1;
+  visibility: visible;
+
+  &.hide-overlay {
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+  }
+  
+  md-progress-circular {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.login-mask {
+  background-color: rgb(33,150,243);
+  z-index: 10000;
+  
+  .login-mask-inner {
+    max-width: 360px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

@@ -9,7 +9,7 @@
  */
 angular
   .module('staffManagerApp')
-  .controller('AppCtrl', function ($location, $mdSidenav) {
+  .controller('AppCtrl', function ($location, $mdSidenav, loadingIndicatorService) {
     var vm = this;
 
     vm.navigateTo = function (target) {
@@ -20,4 +20,6 @@ angular
     vm.toggleSidenav = function () {
       $mdSidenav('left').toggle();
     };
+
+    vm.loadingIndicatorService = loadingIndicatorService;
   });

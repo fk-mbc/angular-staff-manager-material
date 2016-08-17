@@ -1,0 +1,90 @@
+[
+  {
+    "users": {
+      "id": "key",
+      "firstName": "char",
+      "lastName": "char",
+      "email": "char",
+      "gender": "char",
+      "birthday": "date",
+      "image": "char",
+      "company": "char",
+      "jobtitle": "char",
+      "phone": "char",
+      "password": "char",
+      "salt": "char",
+      "created": "datetime",
+      "updated": "datetime",
+      "techversion": "number"
+    },
+    "companies": {
+      "id": "key",
+      "name": "char",
+      "created": "datetime",
+      "updated": "datetime",
+      "techversion": "number"
+    },
+    "jobtitles": {
+      "id": "key",
+      "name": "char",
+      "created": "datetime",
+      "updated": "datetime",
+      "techversion": "number"
+    }
+  },
+  {
+    "users": {
+      "autoincremet": [
+        "id",
+        "techversion"
+      ],
+      "readonly": [
+        "id",
+        "created",
+        "updated",
+        "techversion"
+      ],
+      "invisible": [
+        "password",
+        "salt"
+      ],
+      "dateOnEdit": [
+        "updated"
+      ]
+    },
+    "companies": {
+      "autoincremet": [
+        "id",
+        "techversion"
+      ],
+      "readonly": [
+        "id",
+        "created",
+        "updated",
+        "techversion"
+      ],
+      "invisible": [
+      ],
+      "dateOnEdit": [
+        "updated"
+      ]
+    },
+    "jobtitles": {
+      "autoincremet": [
+        "id",
+        "techversion"
+      ],
+      "readonly": [
+        "id",
+        "created",
+        "updated",
+        "techversion"
+      ],
+      "invisible": [
+      ],
+      "dateOnEdit": [
+        "updated"
+      ]
+    }
+  }
+]

@@ -1,4 +1,4 @@
-<md-card>
+<md-card ng-repeat="user in main.users">
   <md-card-title>
     <md-card-title-media>
       <div class="md-media-sm card-media" layout layout-align="center center" >
@@ -6,36 +6,8 @@
       </div>
     </md-card-title-media>
     <md-card-title-text>
-      <span class="md-headline">Username</span>
-      <span class="md-subhead description">Ipsum lorem caveat emptor... <i class="fa fa-trash"></i></span>
-    </md-card-title-text>
-  </md-card-title>
-</md-card>
-
-<md-card>
-  <md-card-title>
-    <md-card-title-media>
-      <div class="md-media-sm card-media" layout layout-align="center center" >
-        <md-icon style="color:grey; width: 40px; height: 40px; font-size: 40px;">person</md-icon>
-      </div>
-    </md-card-title-media>
-    <md-card-title-text>
-      <span class="md-headline">Username</span>
-      <span class="md-subhead description">Ipsum lorem caveat emptor...</span>
-    </md-card-title-text>
-  </md-card-title>
-</md-card>
-
-<md-card>
-  <md-card-title>
-    <md-card-title-media>
-      <div class="md-media-sm card-media" layout layout-align="center center" >
-        <md-icon style="color:grey; width: 40px; height: 40px; font-size: 40px;">person</md-icon>
-      </div>
-    </md-card-title-media>
-    <md-card-title-text>
-      <span class="md-headline">Username</span>
-      <span class="md-subhead description">Ipsum lorem caveat emptor...</span>
+      <span class="md-headline">{{user.firstName}} {{user.lastName}}</span>
+      <span class="md-subhead description">{{user.jobtitle}} at {{user.company}}</span>
     </md-card-title-text>
   </md-card-title>
 </md-card>

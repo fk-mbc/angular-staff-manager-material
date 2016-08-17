@@ -15,7 +15,32 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="staffManagerApp" ng-cloak layout="column"  ng-controller="AppCtrl as app">
+  <body ng-app="staffManagerAppDev" ng-cloak layout="column"  ng-controller="AppCtrl as app">
+
+  <md-backdrop layout-fill layout-padding md-theme="default" class="login-mask md-primary" ng-if="false">
+    <md-content class="login-mask-inner md-hue-2 ng-scope flex md-default-theme" layout-padding>
+      <h2 class="">Login</h2>
+      <form name="projectForm">
+          <md-input-container class="md-block">
+            <label>E-Mail</label>
+            <input required md-no-asterisk name="description" ng-model="project.description">
+            <div ng-messages="projectForm.description.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Password</label>
+            <input required type="password" name="clientName" ng-model="project.clientName">
+            <div ng-messages="projectForm.clientName.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <md-button>Login</md-button>
+          </md-input-container>
+        </form>
+      </md-content>
+    </md-backdrop>
 
   <md-toolbar layout="row">
     <div class="md-toolbar-tools">
@@ -45,7 +70,12 @@
         </md-list-item>
       </md-list>
     </md-sidenav>
-    <md-content flex id="content" ng-view="" layout-padding layout-fill ></md-content>
+    <md-content flex id="content" layout-padding layout-fill >
+      <md-backdrop class="md-sidenav-backdrop md-overlay-bg" ng-class="{'hide-overlay': app.loadingIndicatorService.isLoading !== true}" >
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </md-backdrop>
+      <div ng-view=""></div>
+    </md-content>
   </div>
 
   <!-- build:js(.) scripts/vendor.js -->
@@ -60,12 +90,17 @@
   <script src="bower_components/angular-aria/angular-aria.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-mocks/angular-mocks.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <!-- injector:js -->
+  <script src="/scripts/fake-backend/app-backend.module.js"></script>
   <script src="/scripts/app.module.js"></script>
+  <script src="/scripts/fake-backend/services/dev-storage.service.js"></script>
+  <script src="/scripts/services/loading-indicator.service.js"></script>
+  <script src="/scripts/services/api-ready.service.js"></script>
   <script src="/scripts/about/about.controller.js"></script>
   <script src="/scripts/main/main.controller.js"></script>
   <script src="/scripts/app.controller.js"></script>
