@@ -17,9 +17,9 @@ angular
       $http.get('/api/users').then(function (response) {
         ctrl.users = response.data;
 
-        $timeout(function () {
+        //$timeout(function () {
           loadingIndicatorService.stopLoading();
-        }, 2000);
+       // }, 2000);
 
       }, function (error) {
         console.log(error);

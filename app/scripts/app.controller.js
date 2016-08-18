@@ -28,6 +28,6 @@ angular
     };
 
     $timeout(function () {
-      vm.login.hide = false;
+     // vm.login.hide = false;
     }, 100);
   });

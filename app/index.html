@@ -15,49 +15,53 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="staffManagerAppDev" ng-cloak layout="column"  ng-controller="AppCtrl as app">
+  <body ng-app="staffManagerAppDev" ng-cloak layout="row"  ng-controller="AppCtrl as app">
 
   <ng-include src="'scripts/login/login.template.html'"></ng-include>
 
-  <md-toolbar layout="row">
-    <div class="md-toolbar-tools">
-      <span><md-icon>face</md-icon> Staff Management {{app.test}}</span>
-      <!-- fill up the space between left and right area -->
-      <span flex></span>
-      <md-button class="menu" hide-gt-sm ng-click="app.toggleSidenav()" >
-        <md-icon>menu</md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
+  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-sidenav-left md-navigation-drawer" md-whiteframe="4" md-component-id="left" >
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <span><md-icon>face</md-icon> Staff Manager</span>
+      </div>
+    </md-toolbar>
+    <md-list>
+      <md-list-item role="link" class="md-2-line" ng-click="app.navigateTo('home')">
+        <div>
+          <md-icon class="md-avatar-icon">home</md-icon>
+          Home
+        </div>
+      </md-list-item>
+      <md-list-item  role="link" class="md-2-line" ng-click="app.navigateTo('about')">
+        <div>
+          <md-icon class="md-avatar-icon">info</md-icon>
+          About
+        </div>
+      </md-list-item>
+      <md-list-item  role="link" class="md-2-line" ng-click="app.login.hide = false">
+        <div>
+          <md-icon class="md-avatar-icon">lock</md-icon>
+          Login
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
 
-  <div flex layout="row">
-    <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-sidenav-left md-whiteframe-z2 md-navigation-drawer" md-component-id="left" >
-      <md-list>
-        <md-list-item role="link" class="md-2-line" ng-click="app.navigateTo('home')">
-          <div>
-            <md-icon class="md-avatar-icon">home</md-icon>
-            Home
-          </div>
-        </md-list-item>
-        <md-list-item  role="link" class="md-2-line" ng-click="app.navigateTo('about')">
-          <div>
-            <md-icon class="md-avatar-icon">info</md-icon>
-            About
-          </div>
-        </md-list-item>
-        <md-list-item  role="link" class="md-2-line" ng-click="app.login.hide = false">
-          <div>
-            <md-icon class="md-avatar-icon">lock</md-icon>
-            Login
-          </div>
-        </md-list-item>
-      </md-list>
-    </md-sidenav>
+  <div flex layout="column">
+    <md-toolbar layout="row" md-whiteframe="2">
+      <div class="md-toolbar-tools">
+        <span flex></span>
+        <md-button class="menu" hide-gt-sm ng-click="app.toggleSidenav()" >
+          <md-icon>menu</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
     <md-content flex id="content" >
       <md-backdrop class="md-sidenav-backdrop md-overlay-bg" ng-class="{'hide-overlay': app.loadingIndicatorService.isLoading !== true}" >
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
       </md-backdrop>
-      <div flex ng-view="" layout-fill layout-padding class="view"></div>
+      <div flex ng-view="" layout-fill class="view"></div>
     </md-content>
   </div>
 

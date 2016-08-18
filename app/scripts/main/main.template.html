@@ -1,13 +1,28 @@
-<md-card ng-repeat="user in main.users">
-  <md-card-title>
-    <md-card-title-media>
-      <div class="md-media-sm card-media" layout layout-align="center center" >
-        <md-icon style="color:grey; width: 40px; height: 40px; font-size: 40px;">person</md-icon>
-      </div>
-    </md-card-title-media>
-    <md-card-title-text>
-      <span class="md-headline">{{user.firstName}} {{user.lastName}}</span>
-      <span class="md-subhead description">{{user.jobtitle}} at {{user.company}}</span>
-    </md-card-title-text>
-  </md-card-title>
-</md-card>
+<div class="bg-header" md-colors="{background: 'blue'}"></div>
+<div layout-padding class="main-layout">
+  <div class="main-layout-header" layout="row">
+    <div flex class="title">
+      <h1>Overview</h1>
+      <div>Results: 100</div>
+    </div>
+    <span flex></span>
+    <div flex class="">
+      <md-input-container>
+        <input type="text" placeholder="Search" class="md-input">
+      </md-input-container>
+    </div>
+  </div>
+  <md-card ng-repeat="user in main.users">
+    <md-card-title>
+      <md-card-title-media>
+        <div class="md-media-sm card-media" layout layout-align="center center" >
+          <md-icon style="color:grey; width: 40px; height: 40px; font-size: 40px;">person</md-icon>
+        </div>
+      </md-card-title-media>
+      <md-card-title-text>
+        <span class="md-headline">{{user.firstName}} {{user.lastName}}</span>
+        <span class="md-subhead description">{{user.jobtitle}} at {{user.company}}</span>
+      </md-card-title-text>
+    </md-card-title>
+  </md-card>
+</div>
